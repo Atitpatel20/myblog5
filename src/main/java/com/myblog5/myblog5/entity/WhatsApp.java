@@ -5,14 +5,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="posts")
+@Table(name="whatsAppUsers")
 
-public class Post {
+public class WhatsApp {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
 
     private long id;
-    private String tittle;
-    private String description;
-    private String content;
+    private String name;
+    private String userName;
+    private String email;
+    private long mobile;
+
 }
