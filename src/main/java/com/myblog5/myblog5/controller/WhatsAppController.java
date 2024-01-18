@@ -22,14 +22,18 @@ public class WhatsAppController {
         WhatsAppDto registration = whatsAppService.createRegistration(whatsAppDto);
         return new ResponseEntity<>(registration, HttpStatus.CREATED);
     }
-    @GetMapping("/persnolize")
+    @GetMapping("/particular")
     public ResponseEntity<WhatsAppDto> GetDetailesById(@RequestParam long id){
         WhatsAppDto dto = whatsAppService.GetDetailesById(id);
         return new ResponseEntity<>(dto,HttpStatus.OK);
     }
+    // http://localhost:8080//api/users?pageNo=0&pageSize=3
     @GetMapping
-    public List<WhatsAppDto> getALlUser(){
-        List<WhatsAppDto> users=whatsAppService.getALlUser();
+    public List<WhatsAppDto> getALlUser(
+            @RequestParam(name="pageNo",required = false,defaultValue = "0")int pageNo,
+            @RequestParam(name="pageSize",required = false,defaultValue = "0")int pageSize
+    ){
+        List<WhatsAppDto> users=whatsAppService.getALlUser(pageNo,pageSize);
         return users;
     }
 
