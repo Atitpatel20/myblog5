@@ -27,14 +27,17 @@ public class WhatsAppController {
         WhatsAppDto dto = whatsAppService.GetDetailesById(id);
         return new ResponseEntity<>(dto,HttpStatus.OK);
     }
-    // http://localhost:8080//api/users?pageNo=0&pageSize=3
+    // http://localhost:8080/api/users?pageNo=0&pageSize=5&sortBy=mobile&sortDir=Desc
     @GetMapping
-    public List<WhatsAppDto> getALlUser(
-            @RequestParam(name="pageNo",required = false,defaultValue = "0")int pageNo,
-            @RequestParam(name="pageSize",required = false,defaultValue = "0")int pageSize
-    ){
-        List<WhatsAppDto> users=whatsAppService.getALlUser(pageNo,pageSize);
+    public List<WhatsAppDto> getAllUser(
+            @RequestParam(name = "pageNo", required = false, defaultValue = "0") int pageNo,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10") int pageSize,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "id") String sortBy,
+            @RequestParam(name = "sortDir", required = false, defaultValue = "asc") String sortDir
+    ) {
+        List<WhatsAppDto> users = whatsAppService.getAllUser(pageNo, pageSize, sortBy, sortDir);
         return users;
     }
+
 
 }

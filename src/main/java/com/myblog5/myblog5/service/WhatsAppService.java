@@ -9,5 +9,5 @@ public interface WhatsAppService {
 
     WhatsAppDto GetDetailesById(long id);
 
-    List<WhatsAppDto> getALlUser(int pageNo, int pagesize);
+    List<WhatsAppDto> getAllUser(int pageNo, int pagesize, String sortBy, String sortDir);
 }
