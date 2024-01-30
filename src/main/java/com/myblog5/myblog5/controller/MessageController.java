@@ -23,4 +23,16 @@ public class MessageController {
         MessageDto dtos = messageService.createMessage(messageDto, whatsappId);
         return new ResponseEntity<>(dtos, HttpStatus.CREATED);
     }
+    // http://localhost:8080/api/message/2
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String >deleteMessageById(@PathVariable long id){
+        messageService.deleteMessageById(id);
+        return new ResponseEntity<>("message is deleted",HttpStatus.OK);
+    }
+    // http://localhost:8080/api/message/2
+    @PutMapping("/{id}")
+    public ResponseEntity<MessageDto> updateMessage(@PathVariable long id,@RequestBody MessageDto messageDto){
+        MessageDto dto= messageService.updateMessage(id,messageDto);
+        return new ResponseEntity<>(dto,HttpStatus.OK);
+    }
 }

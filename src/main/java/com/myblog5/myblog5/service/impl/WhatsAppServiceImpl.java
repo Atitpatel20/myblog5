@@ -5,6 +5,7 @@ import com.myblog5.myblog5.exception.ResourceNotFoundException;
 import com.myblog5.myblog5.payload.WhatsAppDto;
 import com.myblog5.myblog5.repository.WhatsAppRepository;
 import com.myblog5.myblog5.service.WhatsAppService;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -18,9 +19,11 @@ import java.util.stream.Collectors;
 public class WhatsAppServiceImpl implements WhatsAppService {
 
     private WhatsAppRepository whatsAppRepository;
+    private ModelMapper modelMapper;
 
-    public WhatsAppServiceImpl(WhatsAppRepository whatsAppRepository) {
+    public WhatsAppServiceImpl(WhatsAppRepository whatsAppRepository,ModelMapper modelMapper) {
         this.whatsAppRepository = whatsAppRepository;
+        this.modelMapper=modelMapper;
     }
 
     @Override
@@ -53,21 +56,23 @@ public class WhatsAppServiceImpl implements WhatsAppService {
     }
 
     WhatsAppDto mapToDto (WhatsApp whatsApp){
-        WhatsAppDto dto= new WhatsAppDto();
-        dto.setId(whatsApp.getId());
-        dto.setName(whatsApp.getName());
-        dto.setUserName(whatsApp.getUserName());
-        dto.setEmail(whatsApp.getEmail());
-        dto.setMobile(whatsApp.getMobile());
+        WhatsAppDto dto = modelMapper.map(whatsApp, WhatsAppDto.class);
+//        WhatsAppDto dto= new WhatsAppDto();
+//        dto.setId(whatsApp.getId());
+//        dto.setName(whatsApp.getName());
+//        dto.setUserName(whatsApp.getUserName());
+//        dto.setEmail(whatsApp.getEmail());
+//        dto.setMobile(whatsApp.getMobile());
         return dto;
     }
    WhatsApp mapToEntity(WhatsAppDto whatsAppDto){
-       WhatsApp whatsApp= new WhatsApp();
-       whatsApp.setId(whatsAppDto.getId());
-       whatsApp.setUserName(whatsAppDto.getName());
-       whatsApp.setName(whatsAppDto.getUserName());
-       whatsApp.setEmail(whatsAppDto.getEmail());
-       whatsApp.setMobile(whatsAppDto.getMobile());
+       WhatsApp whatsApp = modelMapper.map(whatsAppDto, WhatsApp.class);
+//       WhatsApp whatsApp= new WhatsApp();
+//       whatsApp.setId(whatsAppDto.getId());
+//       whatsApp.setUserName(whatsAppDto.getName());
+//       whatsApp.setName(whatsAppDto.getUserName());
+//       whatsApp.setEmail(whatsAppDto.getEmail());
+//       whatsApp.setMobile(whatsAppDto.getMobile());
         return whatsApp;
     }
 }

@@ -2,6 +2,7 @@ package com.myblog5.myblog5.service.impl;
 
 import com.myblog5.myblog5.entity.Messages;
 import com.myblog5.myblog5.entity.WhatsApp;
+import com.myblog5.myblog5.exception.ResourceNotFoundException;
 import com.myblog5.myblog5.payload.MessageDto;
 import com.myblog5.myblog5.repository.MessageRepository;
 import com.myblog5.myblog5.repository.WhatsAppRepository;
@@ -33,6 +34,29 @@ public class MessageServiceImpl implements MessageService {
         dto.setId(savedMessages.getId());
         dto.setContent(savedMessages.getContent());
         dto.setMessage(savedMessages.getMessage());
+        return dto;
+    }
+
+    @Override
+    public void deleteMessageById(long id) {
+        messageRepository.deleteById(id);
+    }
+
+    @Override
+    public MessageDto updateMessage(long id, MessageDto messageDto) {
+        Messages messages = messageRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException("no user found:" + id)
+        );
+        messages.setId(messageDto.getId());
+        messages.setContent(messageDto.getContent());
+        messages.setMessage(messageDto.getMessage());
+
+        Messages update = messageRepository.save(messages);
+        MessageDto dto= new MessageDto();
+
+        dto.setId(update.getId());
+        dto.setContent(update.getContent());
+        dto.setMessage(update.getMessage());
         return dto;
     }
 }
