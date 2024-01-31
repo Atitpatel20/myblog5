@@ -29,10 +29,10 @@ public class MessageController {
         messageService.deleteMessageById(id);
         return new ResponseEntity<>("message is deleted",HttpStatus.OK);
     }
-    // http://localhost:8080/api/message/2
-    @PutMapping("/{id}")
-    public ResponseEntity<MessageDto> updateMessage(@PathVariable long id,@RequestBody MessageDto messageDto){
-        MessageDto dto= messageService.updateMessage(id,messageDto);
+    // http://localhost:8080/api/message/2/whatsapp/4
+    @PutMapping("/{id}/whatsapp/{whatsappId}")
+    public ResponseEntity<MessageDto> updateMessage(@PathVariable long id,@RequestBody MessageDto messageDto,@PathVariable long whatsappId){
+        MessageDto dto= messageService.updateMessage(id,messageDto,whatsappId);
         return new ResponseEntity<>(dto,HttpStatus.OK);
     }
 }

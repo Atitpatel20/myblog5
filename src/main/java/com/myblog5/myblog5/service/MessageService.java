@@ -7,5 +7,5 @@ public interface MessageService  {
 
     void deleteMessageById(long id);
 
-    MessageDto updateMessage(long id, MessageDto messageDto);
+    MessageDto updateMessage(long id, MessageDto messageDto, long whatsappId);
 }
