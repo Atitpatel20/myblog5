@@ -1,6 +1,6 @@
 package com.myblog5.myblog5.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 @Entity
